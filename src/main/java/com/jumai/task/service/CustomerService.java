@@ -24,7 +24,7 @@ public class CustomerService {
         return customerRepository.findAll((Specification<Customer>) (root, criteriaQuery, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();
             if (country != null) {
-                predicate = criteriaBuilder.and(predicate, criteriaBuilder.like(root.get("phone"), "(" + country.code + ")%"));
+                predicate = criteriaBuilder.and(predicate, criteriaBuilder.like(root.get("phone"), "(" + country.code.substring(1) + ")%"));
             }
             return predicate;
         }, pageable).getContent();

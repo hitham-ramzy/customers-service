@@ -1,4 +1,4 @@
-package com.jumai.task.entity.filter;
+package com.jumai.task.filter;
 
 import com.jumai.task.entity.enums.CountryEnum;
 import com.jumai.task.entity.enums.StateEnum;
