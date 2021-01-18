@@ -1,6 +1,6 @@
-package com.jumai.task.entity.dto;
+package com.jumia.task.entity.dto;
 
-import com.jumai.task.entity.enums.StateEnum;
+import com.jumia.task.entity.enums.StateEnum;
 import lombok.Data;
 
 @Data

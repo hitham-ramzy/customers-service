@@ -1,10 +1,10 @@
-package com.jumai.task.mapper;
+package com.jumia.task.mapper;
 
-import com.jumai.task.entity.Customer;
-import com.jumai.task.entity.dto.CustomerResponseDTO;
-import com.jumai.task.entity.enums.CountryEnum;
-import com.jumai.task.entity.enums.StateEnum;
-import com.jumai.task.util.ApplicationUtils;
+import com.jumia.task.entity.Customer;
+import com.jumia.task.entity.dto.CustomerResponseDTO;
+import com.jumia.task.entity.enums.CountryEnum;
+import com.jumia.task.entity.enums.StateEnum;
+import com.jumia.task.util.ApplicationUtils;
 
 public class CustomerMapper {
 

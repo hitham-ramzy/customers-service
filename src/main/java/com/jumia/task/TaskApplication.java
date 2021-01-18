@@ -1,4 +1,4 @@
-package com.jumai.task;
+package com.jumia.task;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package com.jumai.task.repository;
+package com.jumia.task.repository;
 
-import com.jumai.task.entity.Customer;
+import com.jumia.task.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

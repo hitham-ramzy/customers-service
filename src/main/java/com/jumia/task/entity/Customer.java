@@ -1,4 +1,4 @@
-package com.jumai.task.entity;
+package com.jumia.task.entity;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.jumai.task.dialect;
+package com.jumia.task.dialect;
 
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;

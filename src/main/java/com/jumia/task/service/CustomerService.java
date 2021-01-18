@@ -1,9 +1,9 @@
-package com.jumai.task.service;
+package com.jumia.task.service;
 
-import com.jumai.task.entity.Customer;
-import com.jumai.task.entity.enums.CountryEnum;
-import com.jumai.task.entity.enums.StateEnum;
-import com.jumai.task.repository.CustomerRepository;
+import com.jumia.task.entity.Customer;
+import com.jumia.task.entity.enums.CountryEnum;
+import com.jumia.task.entity.enums.StateEnum;
+import com.jumia.task.repository.CustomerRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;

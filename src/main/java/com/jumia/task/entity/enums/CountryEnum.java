@@ -1,4 +1,4 @@
-package com.jumai.task.entity.enums;
+package com.jumia.task.entity.enums;
 
 public enum CountryEnum {
 

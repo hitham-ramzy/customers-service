@@ -1,6 +1,6 @@
-package com.jumai.task.util;
+package com.jumia.task.util;
 
-import com.jumai.task.entity.enums.CountryEnum;
+import com.jumia.task.entity.enums.CountryEnum;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
