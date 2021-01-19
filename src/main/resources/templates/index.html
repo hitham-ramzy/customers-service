@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/styles/styles.css" rel="stylesheet"/>
+    <title>Jumia Task</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        h1 {
+            align-content: center;
+        }
+    </style>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+
+<body>
+<h1>Welcome to Jumia task</h1>
+
+
+<div id="app">
+
+    <form v-on:submit="fetchCustomers($event)">
+        <div class="raw">
+            <div class="col-6">
+                <label for="countries">Choose a country:</label>
+            </div>
+            <div class="col-6">
+                <select name="countries" id="countries" v-on:change="changeCountry($event)">
+                    <option value="Cameroon">Cameroon</option>
+                    <option value="Ethiopia">Ethiopia</option>
+                    <option value="Morocco">Morocco</option>
+                    <option value="Mozambique">Mozambique</option>
+                    <option value="Uganda">Uganda</option>
+                </select></div>
+        </div>
+        <div class="raw">
+            <button type="submit">search</button>
+        </div>
+    </form>
+
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Country</th>
+            <th>Country Code</th>
+            <th>State</th>
+        </tr>
+        <tr v-for="customer in customers">
+            <td>{{customer.id}}</td>
+            <td>{{customer.name}}</td>
+            <td>{{customer.phone}}</td>
+            <td>{{customer.country}}</td>
+            <td>{{customer.countyCode}}</td>
+            <td>{{customer.state}}</td>
+        </tr>
+    </table>
+</div>
+
+
+<script>
+    const URL = 'http://localhost:8080/api/customer';
+    var app = new Vue({
+        el: '#app',
+        data: {
+            customers: [],
+            // country: '',
+            // size: 5,
+            // page: 0
+        },
+        props: [
+            'country',
+            'size',
+            'page'
+        ],
+        created() {
+            fetch(`${URL}?country=${this.country || ''}&size=${this.size || 10}&page=${this.page || 0}`)
+                .then(response => {
+                    return response.json()
+                }).then(c => {
+                this.customers = c;
+            });
+        }, methods: {
+            fetchCustomers(e) {
+                e.preventDefault();
+                fetch(`${URL}?country=${this.country || ''}&size=${this.size || 10}&page=${this.page || ''}`)
+                    .then(response => {
+                        return response.json()
+                    }).then(c => {
+                    this.customers = c;
+                });
+            },
+            changeCountry(event) {
+                this.country = event.target.value;
+            }
+        }
+    });
+
+
+</script>
+
+</body>
+</html>
