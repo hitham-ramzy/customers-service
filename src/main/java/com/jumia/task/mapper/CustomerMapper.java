@@ -6,8 +6,17 @@ import com.jumia.task.entity.enums.CountryEnum;
 import com.jumia.task.entity.enums.StateEnum;
 import com.jumia.task.util.ApplicationUtils;
 
+/**
+ * The type Customer mapper.
+ */
 public class CustomerMapper {
 
+    /**
+     * Map to response dto customer response dto.
+     *
+     * @param customer the customer
+     * @return the customer response dto
+     */
     public static CustomerResponseDTO mapToResponseDTO(Customer customer) {
         CustomerResponseDTO dto = new CustomerResponseDTO();
         dto.setId(customer.getId());

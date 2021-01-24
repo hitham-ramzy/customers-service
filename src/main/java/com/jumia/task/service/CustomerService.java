@@ -11,20 +11,42 @@ import org.springframework.stereotype.Service;
 import javax.persistence.criteria.Predicate;
 import java.util.List;
 
+/**
+ * The type Customer service.
+ * holds all implementations of the business logic
+ */
 @Service
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
+    /**
+     * Instantiates a new Customer service.
+     *
+     * @param customerRepository the customer repository
+     */
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
+    /**
+     * Find all list without any filtration or pagination
+     *
+     * @return the list of customers
+     */
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }
 
 
+    /**
+     * Find a list of customers with a filtration passed in the input.
+     *
+     * @param country  the country
+     * @param state    the state
+     * @param pageable the pageable
+     * @return the list
+     */
     public List<Customer> findAll(CountryEnum country, StateEnum state, Pageable pageable) {
         return customerRepository.findAll((Specification<Customer>) (root, criteriaQuery, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();

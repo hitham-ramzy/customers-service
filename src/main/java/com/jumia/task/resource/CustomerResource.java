@@ -14,21 +14,42 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Customer resource.
+ */
 @RestController
 @RequestMapping("/api")
 public class CustomerResource {
 
     private final CustomerService customerService;
 
+    /**
+     * Instantiates a new Customer resource.
+     *
+     * @param customerService the customer service
+     */
     public CustomerResource(CustomerService customerService) {
         this.customerService = customerService;
     }
 
+    /**
+     * Find all by criteria list.
+     *
+     * @param country  the country
+     * @param state    the state
+     * @param pageable the pageable
+     * @return the list
+     */
     @GetMapping("/customer")
     public List<CustomerResponseDTO> findAllByCriteria(CountryEnum country, StateEnum state, @ApiParam Pageable pageable) {
         return customerService.findAll(country, state, pageable).stream().map(CustomerMapper::mapToResponseDTO).collect(Collectors.toList());
     }
 
+    /**
+     * Find all list.
+     *
+     * @return the list
+     */
     @GetMapping("/customer/all")
     public List<CustomerResponseDTO> findAll() {
         return customerService.findAll().stream().map(CustomerMapper::mapToResponseDTO).collect(Collectors.toList());
