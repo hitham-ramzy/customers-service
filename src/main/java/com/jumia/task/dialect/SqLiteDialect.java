@@ -4,6 +4,7 @@ import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;
 import org.hibernate.dialect.function.StandardSQLFunction;
 import org.hibernate.dialect.function.VarArgsSQLFunction;
+import org.hibernate.type.BooleanType;
 import org.hibernate.type.StringType;
 
 import java.sql.Types;
@@ -39,6 +40,7 @@ public class SqLiteDialect extends Dialect {
         registerFunction("mod", new SQLFunctionTemplate(StringType.INSTANCE, "?1 % ?2"));
         registerFunction("substr", new StandardSQLFunction("substr", StringType.INSTANCE));
         registerFunction("substring", new StandardSQLFunction("substr", StringType.INSTANCE));
+        registerFunction("regexp", new SQLFunctionTemplate(BooleanType.INSTANCE, "?1 regexp ?2"));
     }
 
     public boolean supportsIdentityColumns() {

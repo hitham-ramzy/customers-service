@@ -28,4 +28,9 @@ public class CustomerResource {
     public List<CustomerResponseDTO> findAll(CountryEnum country, StateEnum state, @ApiParam Pageable pageable) {
         return customerService.findAll(country, state, pageable).stream().map(CustomerMapper::mapToResponseDTO).collect(Collectors.toList());
     }
+
+    @GetMapping("/customer2")
+    public List<CustomerResponseDTO> findAll2(CountryEnum country, StateEnum state, @ApiParam Pageable pageable) {
+        return customerService.findByRegex(country, state, pageable).stream().map(CustomerMapper::mapToResponseDTO).collect(Collectors.toList());
+    }
 }
