@@ -25,7 +25,12 @@ public class CustomerResource {
     }
 
     @GetMapping("/customer")
-    public List<CustomerResponseDTO> findAll(CountryEnum country, StateEnum state, @ApiParam Pageable pageable) {
+    public List<CustomerResponseDTO> findAllByCriteria(CountryEnum country, StateEnum state, @ApiParam Pageable pageable) {
         return customerService.findAll(country, state, pageable).stream().map(CustomerMapper::mapToResponseDTO).collect(Collectors.toList());
+    }
+
+    @GetMapping("/customer/all")
+    public List<CustomerResponseDTO> findAll() {
+        return customerService.findAll().stream().map(CustomerMapper::mapToResponseDTO).collect(Collectors.toList());
     }
 }

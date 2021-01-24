@@ -6,8 +6,10 @@
     <link href="../static/styles/styles.css" rel="stylesheet"/>
     <title>Jumia Task</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -37,28 +39,35 @@
 <body>
 <h1>Welcome to Jumia task</h1>
 
-
 <div id="app">
-
-    <form v-on:submit="fetchCustomers($event)">
-        <div class="raw">
-            <div class="col-6">
-                <label for="countries">Choose a country:</label>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <h4>Choose a country:</h4>
             </div>
-            <div class="col-6">
-                <select name="countries" id="countries" v-on:change="changeCountry($event)">
+            <div class="col-sm-3">
+                <select name="countries" id="countries" class="btn btn-primary dropdown-toggle"
+                        v-on:change="changeCountry($event)">
+                    <option value=""></option>
                     <option value="Cameroon">Cameroon</option>
                     <option value="Ethiopia">Ethiopia</option>
                     <option value="Morocco">Morocco</option>
                     <option value="Mozambique">Mozambique</option>
                     <option value="Uganda">Uganda</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <h4 for="state">State</h4>
+            </div>
+            <div class="col-sm-3">
+                <select name="state" id="state" class="btn btn-primary dropdown-toggle"
+                        v-on:change="changeState($event)">
+                    <option value=""></option>
+                    <option value="VALID">Valid</option>
+                    <option value="INVALID">Invalid</option>
                 </select></div>
         </div>
-        <div class="raw">
-            <button type="submit">search</button>
-        </div>
-    </form>
-
+    </div>
 
     <table>
         <tr>
@@ -69,12 +78,12 @@
             <th>Country Code</th>
             <th>State</th>
         </tr>
-        <tr v-for="customer in customers">
+        <tr v-for="customer in filteredCustomers">
             <td>{{customer.id}}</td>
             <td>{{customer.name}}</td>
             <td>{{customer.phone}}</td>
             <td>{{customer.country}}</td>
-            <td>{{customer.countyCode}}</td>
+            <td>{{customer.countryCode}}</td>
             <td>{{customer.state}}</td>
         </tr>
     </table>
@@ -86,35 +95,35 @@
     var app = new Vue({
         el: '#app',
         data: {
-            customers: [],
-            // country: '',
-            // size: 5,
-            // page: 0
+            customers: []
         },
         props: [
-            'country',
+            'filteredCustomers',
             'size',
-            'page'
+            'page',
+            'country',
+            'state'
         ],
         created() {
-            fetch(`${URL}?country=${this.country || ''}&size=${this.size || 10}&page=${this.page || 0}`)
+            fetch(`${URL}/all`)
                 .then(response => {
                     return response.json()
-                }).then(c => {
-                this.customers = c;
+                }).then(customers => {
+                this.customers = customers;
+                this.filteredCustomers = customers;
             });
         }, methods: {
-            fetchCustomers(e) {
-                e.preventDefault();
-                fetch(`${URL}?country=${this.country || ''}&size=${this.size || 10}&page=${this.page || ''}`)
-                    .then(response => {
-                        return response.json()
-                    }).then(c => {
-                    this.customers = c;
-                });
-            },
             changeCountry(event) {
                 this.country = event.target.value;
+                this.updateCustomers();
+            },
+            changeState(event) {
+                this.state = event.target.value;
+                this.updateCustomers();
+            }, updateCustomers() {
+                this.filteredCustomers = this.customers.filter(c => {
+                    return (this.country ? (c.country === this.country) : true) && (this.state ? (c.state === this.state) : true);
+                });
             }
         }
     });

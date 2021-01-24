@@ -20,6 +20,11 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    public List<Customer> findAll() {
+        return customerRepository.findAll();
+    }
+
+
     public List<Customer> findAll(CountryEnum country, StateEnum state, Pageable pageable) {
         return customerRepository.findAll((Specification<Customer>) (root, criteriaQuery, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();

@@ -11,5 +11,5 @@ public class CustomerResponseDTO {
     private String phone;
     private String country;
     private String countryCode;
-    private StateEnum state;
+    private StateEnum state = StateEnum.INVALID;
 }

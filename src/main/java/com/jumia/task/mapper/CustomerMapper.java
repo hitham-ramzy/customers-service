@@ -13,9 +13,9 @@ public class CustomerMapper {
         dto.setId(customer.getId());
         dto.setName(customer.getName());
         dto.setPhone(customer.getPhone());
-        dto.setState(ApplicationUtils.isValidPhone(customer.getPhone()) ? StateEnum.VALID : StateEnum.INVALID);
         CountryEnum countryEnum = ApplicationUtils.getCountry(customer.getPhone());
         if (countryEnum != null) {
+            dto.setState(ApplicationUtils.isValidPhone(countryEnum, customer.getPhone()) ? StateEnum.VALID : StateEnum.INVALID);
             dto.setCountry(countryEnum.name());
             dto.setCountryCode(countryEnum.code);
         }
