@@ -2,7 +2,6 @@ package com.jumia.task.util;
 
 import com.jumia.task.entity.enums.CountryEnum;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;

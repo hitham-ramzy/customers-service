@@ -2,7 +2,6 @@ package com.jumia.task.service;
 
 import com.jumia.task.entity.Customer;
 import com.jumia.task.entity.enums.CountryEnum;
-import com.jumia.task.entity.enums.StateEnum;
 import com.jumia.task.repository.CustomerRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -47,7 +46,7 @@ public class CustomerService {
      * @param pageable the pageable
      * @return the list
      */
-    public List<Customer> findAll(CountryEnum country, StateEnum state, Pageable pageable) {
+    public List<Customer> findAll(CountryEnum country, Pageable pageable) {
         return customerRepository.findAll((Specification<Customer>) (root, criteriaQuery, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();
             if (country != null) {
