@@ -1,6 +1,8 @@
 package com.jumia.task.util;
 
 import com.jumia.task.entity.enums.CountryEnum;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -18,6 +20,9 @@ public class ApplicationUtils {
      * @return the boolean
      */
     public static boolean isValidPhone(CountryEnum countryEnum, String phone) {
+        if (ObjectUtils.isEmpty(phone)) {
+            return false;
+        }
         Pattern pattern = Pattern.compile(countryEnum.regex);
         return pattern.matcher(phone).matches();
     }
@@ -29,6 +34,9 @@ public class ApplicationUtils {
      * @return the country
      */
     public static CountryEnum getCountry(String phone) {
+        if (ObjectUtils.isEmpty(phone)) {
+            return null;
+        }
         return Arrays.stream(CountryEnum.values()).filter(countryEnum -> phone.startsWith(mapCountryCodeToPhonePattern(countryEnum.code))).findFirst().orElse(null);
     }
 

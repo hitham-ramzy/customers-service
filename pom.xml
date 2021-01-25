@@ -76,6 +76,13 @@
 			<artifactId>springfox-boot-starter</artifactId>
 			<version>${springfox.version}</version>
 		</dependency>
+
+		<!--JUNIT-->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
