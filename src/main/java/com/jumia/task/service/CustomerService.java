@@ -3,6 +3,7 @@ package com.jumia.task.service;
 import com.jumia.task.entity.Customer;
 import com.jumia.task.entity.enums.CountryEnum;
 import com.jumia.task.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -17,16 +18,8 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-    private final CustomerRepository customerRepository;
-
-    /**
-     * Instantiates a new Customer service.
-     *
-     * @param customerRepository the customer repository
-     */
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
+    @Autowired
+    private CustomerRepository customerRepository;
 
     /**
      * Find all list without any filtration or pagination
