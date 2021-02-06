@@ -11,30 +11,43 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TaskApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:/application-integrationtest.properties")
-public class IntegrationTest {
+public class WebMvcTest {
 
     @Autowired
-    private CustomerResource customerResource;
+    private MockMvc mvc;
 
     @Test
     public void testStartup() {
-        assertNotNull(customerResource);
+        assertNotNull(mvc);
     }
 
     @Test
-    public void test() {
-        List<CustomerResponseDTO> customerResponseDTOList = customerResource.findAll();
-        assertNotNull(customerResponseDTOList);
-        assertEquals(41, customerResponseDTOList.size());
+    public void testIndexRedirection() throws Exception {
+        this.mvc.perform(get("/"))
+                .andExpect(status().is3xxRedirection());
+
+    }
+
+    @Test
+    public void testGetCustomers() throws Exception {
+        this.mvc.perform(get("/api/customer"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testGetAllCustomers() throws Exception {
+        this.mvc.perform(get("/api/customer/all"))
+                .andExpect(status().isOk());
     }
 }
